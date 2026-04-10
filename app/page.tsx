@@ -3,14 +3,14 @@ import React from 'react';
 import { useState } from 'react';
 
 export default function Home() {
-  const [movieDetails,setmovieDetails]=useState({Title:'',Year:'',Runtime:''});
+  const [movieDetails,setMovieDetails]=useState({Title:'',Year:'',Runtime:''});
   const handleSubmit=async(event:React.FormEvent<HTMLFormElement>)=>{
     event.preventDefault();
     
     const formData=new FormData(event.currentTarget);
     const movie=formData.get("movie");
     console.log(movie);
-    const response=await fetch('api/movie',{
+    const response=await fetch('/api/movie',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({movie})
@@ -18,10 +18,10 @@ export default function Home() {
     console.log(response);
     const data=await response.json();
     if(data.Title && data.Year && data.Runtime){
-      setmovieDetails({Title:data.Title,Year:data.Year,Runtime:data.Runtime});
+      setMovieDetails({Title:data.Title,Year:data.Year,Runtime:data.Runtime});
     }
     else{
-      setmovieDetails({Title:'Movie not found',Year:'',Runtime:''});
+      setMovieDetails({Title:'Movie not found',Year:'',Runtime:''});
     }
   }
   return (
