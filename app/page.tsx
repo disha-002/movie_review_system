@@ -9,13 +9,11 @@ export default function Home() {
     
     const formData=new FormData(event.currentTarget);
     const movie=formData.get("movie");
-    console.log(movie);
     const response=await fetch('/api/movie',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({movie})
     })
-    console.log(response);
     const data=await response.json();
     if(data.Title && data.Year && data.Runtime){
       setMovieDetails({Title:data.Title,Year:data.Year,Runtime:data.Runtime});
