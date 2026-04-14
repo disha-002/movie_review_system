@@ -1,44 +1,51 @@
 "use client"
+import Link from 'next/link';
 import React from 'react';
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
+interface Movie {
+  id: number;
+  movie_name: string;
+  review: string;
+}
 export default function Home() {
-  const [movieDetails,setMovieDetails]=useState({Title:'',Year:'',Runtime:''});
-  const handleSubmit=async(event:React.FormEvent<HTMLFormElement>)=>{
-    event.preventDefault();
-    
-    const formData=new FormData(event.currentTarget);
-    const movie=formData.get("movie");
-    const response=await fetch('/api/movie',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({movie})
-    })
-    const data=await response.json();
-    if(data.Title && data.Year && data.Runtime){
-      setMovieDetails({Title:data.Title,Year:data.Year,Runtime:data.Runtime});
-    }
-    else{
-      setMovieDetails({Title:'Movie not found',Year:'',Runtime:''});
-    }
-  }
+  const [movieDetails, setMovieDetails] = useState<Movie[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const res = await fetch('/api/movies');
+        const data = await res.json();
+        setMovieDetails(data);
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchMovies();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+
   return (
     <>
-    <h1>Search for a movie</h1>
-    <form onSubmit={handleSubmit}>
-      <input 
-      type="text" 
-      name ="movie"
-      placeholder="movie name"/>
-      <button type="submit">submit</button>
-    </form>
-    {(movieDetails.Title && (
-      <div>
-        <h2>{movieDetails.Title}</h2>
-        <p>Year: {movieDetails.Year}</p>
-        <p>Runtime: {movieDetails.Runtime}</p>
+      <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
+        <Link href="/">Movies</Link>
+        <Link href="/review">Review</Link>
       </div>
-    ))}
+      {movieDetails && movieDetails.length > 0 ? (
+        <ul>
+          {movieDetails.map((movie) => (
+            <li key={movie.id}>
+              <h2>{movie.movie_name}</h2>
+              <p>{movie.review}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No movies available.</p>
+      )}
     </>
   );
 }
