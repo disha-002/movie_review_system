@@ -1,12 +1,13 @@
 "use client"
-import Link from 'next/link';
 import React from 'react';
 import { useState, useEffect } from 'react';
+
 interface Movie {
   id: number;
   movie_name: string;
   review: string;
 }
+
 export default function Home() {
   const [movieDetails, setMovieDetails] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
@@ -26,14 +27,11 @@ export default function Home() {
     fetchMovies();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p>Loading movies...</p>;
 
   return (
     <>
-      <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
-        <Link href="/">Movies</Link>
-        <Link href="/review">Review</Link>
-      </div>
+      <h1>Movie Reviews</h1>
       {movieDetails && movieDetails.length > 0 ? (
         <ul>
           {movieDetails.map((movie) => (
@@ -44,7 +42,7 @@ export default function Home() {
           ))}
         </ul>
       ) : (
-        <p>No movies available.</p>
+        <p>No reviews available. Start by writing a review!</p>
       )}
     </>
   );

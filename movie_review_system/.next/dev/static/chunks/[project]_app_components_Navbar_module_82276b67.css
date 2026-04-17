@@ -1,0 +1,72 @@
+/* [project]/app/components/Navbar.module.css [app-client] (css) */
+.Navbar-module__pSp8Ga__navbar {
+  z-index: 100;
+  background: linear-gradient(135deg, #675311 0%, #9e7b2f 100%);
+  position: sticky;
+  top: 0;
+  box-shadow: 0 4px 12px #00000059;
+}
+
+.Navbar-module__pSp8Ga__navContainer {
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+}
+
+.Navbar-module__pSp8Ga__logo {
+  color: #fff;
+  align-items: center;
+  gap: .5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: transform .3s;
+  display: flex;
+}
+
+.Navbar-module__pSp8Ga__logo:hover {
+  transform: scale(1.05);
+}
+
+.Navbar-module__pSp8Ga__navLinks {
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+.Navbar-module__pSp8Ga__navLinks a {
+  color: #fff;
+  border-radius: 4px;
+  padding: .5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all .3s;
+}
+
+.Navbar-module__pSp8Ga__navLinks a:hover {
+  background-color: #fff3;
+}
+
+.Navbar-module__pSp8Ga__navLinks .Navbar-module__pSp8Ga__active {
+  background-color: #ffffff4d;
+  border-bottom: 2px solid #fff;
+}
+
+@media (max-width: 768px) {
+  .Navbar-module__pSp8Ga__navContainer {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .Navbar-module__pSp8Ga__navLinks {
+    gap: 1rem;
+  }
+}
+
+/*# sourceMappingURL=%5Bproject%5D_app_components_Navbar_module_82276b67.css.map*/

@@ -41,28 +41,28 @@ export default function Review() {
 
   return (
     <>
-      <h1>Search for a movie</h1>
+      <h1>Write a Movie Review</h1>
       <form onSubmit={handleSubmit}>
         <input 
           type="text" 
           name="movie"
-          placeholder="movie name"
+          placeholder="Enter movie name"
         />
-        <button type="submit">submit</button>
+        <button type="submit">Search Movie</button>
       </form>
       {movieTitle.Title && (
         <>
           <h2>{movieTitle.Title}</h2>
           <form onSubmit={handleReviewSubmit}>
-            <input type="text" name="review" placeholder="write your review here"/>
-            <button type="submit">submit review</button>
+            <input type="text" name="review" placeholder="Write your review here..."/>
+            <button type="submit">Submit Review</button>
           </form>
         </>
       )}
       {review.review&& (
         <>
-          <h3>Review:</h3>
-          <p>{review.review}</p>
+          <h3>✓ Review Posted!</h3>
+          <p><strong>Your review:</strong> {review.review}</p>
         </>
       )}
     </>
